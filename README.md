@@ -15,6 +15,7 @@ Example:- Below Example I am changing the all world Local's Language into Englis
     openstreetmap-carto.lua
    
 2.) Open this file and find  these Three Functions
+    
     1.) function filter_tags_node (keyvalues, numberofkeys)
   
     2.) function filter_basic_tags_rel (keyvalues, numberofkeys)
@@ -22,53 +23,39 @@ Example:- Below Example I am changing the all world Local's Language into Englis
     3.) function filter_tags_way (keyvalues, numberofkeys)
     
 To Change the Local Language to English these Follwing editings are required in all 3 Funtions.
- 
-1.) -- Filtering on nodes
-function filter_tags_node (keyvalues, numberofkeys)
+
+1.) 
+    function filter_tags_node (keyvalues, numberofkeys)
+    #Add These Lines in function
     if keyvalues["name"] then
         keyvalues["name"]=keyvalues["name:en"]
     end
+    #####################
     return filter_tags_generic(keyvalues)
 end
 
-  2.) -- Filtering on relations
-function filter_basic_tags_rel (keyvalues, numberofkeys)
-    -- Filter out objects that are filtered out by filter_tags_generic
+  2.) 
+    function filter_basic_tags_rel (keyvalues, numberofkeys)
+    
+    #Add These Lines in function
     if keyvalues["name"] then
         keyvalues["name"]=keyvalues["name:en"]
     end
-    local filter, keyvalues = filter_tags_generic(keyvalues)
-    if filter == 1 then
-        return 1, keyvalues
-    end
-
-    -- Filter out all relations except route, multipolygon and boundary relations
-    if ((keyvalues["type"] ~= "route") and (keyvalues["type"] ~= "multipolygon") and (keyvalues["type"] ~= "boundary")) then
-        return 1, keyvalues
-    end
-
+    #############################################
+    
     return 0, keyvalues
 end
 
-  3.) -- Filtering on ways
-function filter_tags_way (keyvalues, numberofkeys)
+  3.) 
+    function filter_tags_way (keyvalues, numberofkeys)
     local filter = 0  -- Will object be filtered out?
     local polygon = 0 -- Will object be treated as polygon?
+    
+    #Add These Lines in function 
     if keyvalues["name"] then
         keyvalues["name"]=keyvalues["name:en"]
     end
-    
-    -- Filter out objects that are filtered out by filter_tags_generic
-    filter, keyvalues = filter_tags_generic(keyvalues)
-    if filter == 1 then
-        return filter, keyvalues, polygon, roads
-    end
-
-    polygon = isarea(keyvalues)
-
-    -- Add z_order column
-    keyvalues["z_order"] = z_order(keyvalues)
-
+    ###############################
     return filter, keyvalues, polygon, roads(keyvalues)
 end
 
