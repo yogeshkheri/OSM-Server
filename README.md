@@ -26,6 +26,7 @@ To Change the Local Language to English these Follwing editings are required in 
 
 1.) 
     function filter_tags_node (keyvalues, numberofkeys)
+    
     #Add These Lines in function
     if keyvalues["name"] then
         keyvalues["name"]=keyvalues["name:en"]
@@ -48,8 +49,6 @@ end
 
   3.) 
     function filter_tags_way (keyvalues, numberofkeys)
-    local filter = 0  -- Will object be filtered out?
-    local polygon = 0 -- Will object be treated as polygon?
     
     #Add These Lines in function 
     if keyvalues["name"] then
