@@ -1,4 +1,4 @@
-# OSM-Server
+# OSM-Server Language Localization
 These following things change the language in OSM Server setup in Local system.
 To Setup the OSM Server on Local system i Use following link:-
 https://www.linuxbabe.com/ubuntu/openstreetmap-tile-server-ubuntu-18-04-osm
